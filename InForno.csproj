@@ -189,6 +189,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProdottoController.cs" />
+    <Compile Include="Controllers\ProdottoOrdinatoController.cs" />
     <Compile Include="Controllers\UtentiController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -290,6 +291,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ProdottoOrdinato\" />
     <Folder Include="Views\Values\" />
   </ItemGroup>
   <ItemGroup>

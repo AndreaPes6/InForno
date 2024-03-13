@@ -18,21 +18,6 @@ namespace InForno.Controllers
             return View(db.Prodotto.ToList());
         }
 
-
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Prodotto prodotto = db.Prodotto.Find(id);
-            if (prodotto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(prodotto);
-        }
-
         [Authorize(Roles = "Admin")]
 
         public ActionResult Create()
