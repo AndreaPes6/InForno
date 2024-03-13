@@ -1,0 +1,55 @@
+﻿@model InForno.Models.Prodotto
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<style>
+    .ellipsify {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h2 class="card-title mb-0">Cancella</h2>
+                </div>
+                <div class="card-body">
+                    <h3 class="mb-4">Sei sicuro di voler cancellare questo prodotto?</h3>
+
+                    <dl class="row">
+                        <dt class="col-sm-3">Foto</dt>
+                        <dd class="col-sm-9 ellipsify">@Html.DisplayFor(model => model.Foto)</dd>
+
+                        <dt class="col-sm-3">Nome</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Nome)</dd>
+
+                        <dt class="col-sm-3">Descrizione</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Descrizione)</dd>
+
+                        <dt class="col-sm-3">Prezzo</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Prezzo)</dd>
+
+                        <dt class="col-sm-3">Tempo di Consegna</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.TempoDiConsegna)</dd>
+                    </dl>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-danger mr-2">Cancella</button>
+                            <a href="@Url.Action("Index", "Prodotto")" class="btn btn-secondary">Torna Indietro</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

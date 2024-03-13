@@ -13,40 +13,38 @@ namespace InForno.Controllers
     {
         private DBContext db = new DBContext();
 
-        // GET: Prodotto
         public ActionResult Index()
         {
-            var prodotti = db.Prodotto.ToList();
-            return View(prodotti);
+            return View(db.Prodotto.ToList());
         }
 
-        // GET: Prodotto/Details/5
+
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
             Prodotto prodotto = db.Prodotto.Find(id);
             if (prodotto == null)
             {
                 return HttpNotFound();
             }
-
             return View(prodotto);
         }
 
-        // GET: Prodotto/Create
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.Utenti, "ID", "Username");
             return View();
         }
 
-        // POST: Prodotto/Create
+
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Create([Bind(Include = "ID,Foto,Nome,Descrizione,Prezzo,TempoDiConsegna")] Prodotto prodotto)
         {
             if (ModelState.IsValid)
@@ -56,64 +54,57 @@ namespace InForno.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.Utenti, "ID", "Username", prodotto.ID);
             return View(prodotto);
         }
 
-        // GET: Prodotto/Edit/5
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            Prodotto prodotto = db.Prodotto.Find(id);
-            if (prodotto == null)
+            Prodotto prodotti = db.Prodotto.Find(id);
+            if (prodotti == null)
             {
                 return HttpNotFound();
             }
-
-            ViewBag.UserId = new SelectList(db.Utenti, "ID", "Username", prodotto.ID);
-            return View(prodotto);
+            return View(prodotti);
         }
 
-        // POST: Prodotto/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Foto,Nome,Descrizione,Prezzo,TempoDiConsegna")] Prodotto prodotto)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Edit([Bind(Include = "ID,Foto,Nome,Descrizione,Prezzo,TempoDiConsegna")] Prodotto prodotti)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(prodotto).State = EntityState.Modified;
+                db.Entry(prodotti).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.UserId = new SelectList(db.Utenti, "ID", "Username", prodotto.ID);
-            return View(prodotto);
+            return View(prodotti);
         }
 
-        // GET: Prodotto/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            Prodotto prodotto = db.Prodotto.Find(id);
-            if (prodotto == null)
+            Prodotto prodotti = db.Prodotto.Find(id);
+            if (prodotti == null)
             {
                 return HttpNotFound();
             }
-
-            return View(prodotto);
+            return View(prodotti);
         }
 
-        // POST: Prodotto/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Prodotto prodotto = db.Prodotto.Find(id);

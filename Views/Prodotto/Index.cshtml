@@ -1,37 +1,40 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@model IEnumerable<InForno.Models.Prodotto>
+
+@{
+    ViewBag.Title = "Prodotti";
 }
 
-<h2>Index</h2>
-<div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Foto</th>
-                <th>Nome</th>
-                <th>Descrizione</th>
-                <th>Prezzo</th>
-                <th>Actions</th> <!-- Aggiungi colonna per azioni -->
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var prodotto in Model)
-            {
+<div class="container">
+    <h2 class="mt-5">Prodotti</h2>
+    <div class="mt-4">
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td><img src="@prodotto.Foto" alt="Foto Prodotto"></td>
-                    <td>@prodotto.Nome</td>
-                    <td>@prodotto.Descrizione</td>
-                    <td>€@prodotto.Prezzo</td>
-                    <td>
-                        <!-- Aggiungi pulsanti Modifica e Cancella -->
-                        <a href="@Url.Action("Edit", "Prodotto", new { id = prodotto.ID })" class="btn btn-primary">Modifica</a>
-                        <a href="@Url.Action("Delete", "Prodotto", new { id = prodotto.ID })" class="btn btn-danger" onclick="return confirm('Sei sicuro di voler eliminare questo prodotto?')">Cancella</a>
-                    </td>
+                    <th scope="col">Foto</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Descrizione</th>
+                    <th scope="col">Prezzo</th>
+                    <th scope="col">Azioni</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <p>
-        <a href="@Url.Action("Create", "Prodotto")" class="btn btn-success">Aggiungi Prodotto</a>
-    </p>
+            </thead>
+            <tbody>
+                @foreach (var prodotto in Model)
+                {
+                    <tr>
+                        <td><img src="@prodotto.Foto" alt="Foto Prodotto" class="rounded-4 " style="max-width: 120px;"></td>
+                        <td>@prodotto.Nome</td>
+                        <td>@prodotto.Descrizione</td>
+                        <td>€@prodotto.Prezzo</td>
+                        <td>
+                            <a href="@Url.Action("Edit", "Prodotto", new { id = prodotto.ID })" class="btn btn-primary">Modifica</a>
+                            <a href="@Url.Action("Delete", "Prodotto", new { id = prodotto.ID })" class="btn btn-danger">Elimina</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p>
+            <a href="@Url.Action("Create", "Prodotto")" class="btn btn-success">Aggiungi Prodotto</a>
+        </p>
+    </div>
 </div>

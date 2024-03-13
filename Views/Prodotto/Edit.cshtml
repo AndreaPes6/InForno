@@ -1,7 +1,7 @@
 ﻿@model InForno.Models.Prodotto
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Modifica Prodotto";
 }
 
 <div class="container">
@@ -9,7 +9,7 @@
         <div class="col-md-8">
             <div class="card shadow">
                 <div class="card-header bg-primary text-white">
-                    <h2 class="card-title mb-0">Aggiungi Un Prodotto</h2>
+                    <h2 class="card-title mb-0">Modifica Prodotto</h2>
                 </div>
                 <div class="card-body">
                     @using (Html.BeginForm())
@@ -58,9 +58,8 @@
 
                         <div class="form-group row">
                             <div class="col-md-10">
-                                <button type="submit" class="btn btn-success">Aggiungi</button>
-                                @Html.ActionLink("Torna Indietro", "Index", null, new { @class = "btn btn-secondary" })
-
+                                <button type="submit" class="btn btn-primary">Salva Modifiche</button>
+                                @Html.ActionLink("Torna Indietro", "Index", null, new { @class = "btn btn-secondary ml-2" })
                             </div>
                         </div>
                     }
