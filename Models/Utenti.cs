@@ -13,6 +13,8 @@ namespace InForno.Models
         public Utenti()
         {
             Checkout = new HashSet<Checkout>();
+            Ruolo = "Utente";
+
         }
 
         public int ID { get; set; }

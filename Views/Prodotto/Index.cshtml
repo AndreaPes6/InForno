@@ -18,11 +18,16 @@
                             <p class="card-text">@prodotto.Descrizione</p>
                             <p class="card-text">Prezzo: €@prodotto.Prezzo</p>
                             <div class="text-center">
-                                @if (!User.IsInRole("Admin"))
+                                @if (User.IsInRole("Utente"))
                                 {
-                                    <a href="#" class="btn btn-success">Ordina</a>
+                                    <form method="post" action="@Url.Action("AggiungiAlCarrello", "ProdottoOrdinato")">
+                                        @Html.AntiForgeryToken()
+                                        @Html.Hidden("prodottoID", prodotto.ID)
+                                        <button type="submit" class="btn btn-success">Aggiungi al Carrello</button>
+                                    </form>
                                 }
-                                else
+
+                                @if (User.IsInRole("Admin"))
                                 {
                                     <div class="btn-group" role="group" aria-label="Azioni">
                                         <a href="@Url.Action("Edit", "Prodotto", new { id = prodotto.ID })" class="btn btn-primary">Modifica</a>

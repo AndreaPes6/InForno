@@ -1,16 +1,14 @@
-﻿using InForno.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using InForno.Models;
 using System.Web.Security;
 
 namespace InForno.Controllers
 {
     public class AuthController : Controller
     {
-        DBContext db = new DBContext();
+        private DBContext db = new DBContext();
 
         public ActionResult Login()
         {
@@ -30,16 +28,17 @@ namespace InForno.Controllers
             if (loggedUser.Ruolo == "Admin")
             {
                 FormsAuthentication.SetAuthCookie(loggedUser.ID.ToString(), true);
+                Session["AdminID"] = loggedUser.ID;
                 return RedirectToAction("PaginaAdmin", "Utenti");
             }
             else if (loggedUser.Ruolo == "Utente")
             {
                 FormsAuthentication.SetAuthCookie(loggedUser.ID.ToString(), true);
+                Session["UserID"] = loggedUser.ID;
                 return RedirectToAction("PaginaUtenti", "Utenti");
             }
             else
             {
-
                 return RedirectToAction("Login");
             }
         }
@@ -47,8 +46,8 @@ namespace InForno.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
+            Session.Clear();
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

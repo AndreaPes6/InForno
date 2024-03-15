@@ -28,9 +28,9 @@
                         }
                         else if (User.IsInRole("Utente"))
                         {
-
                             <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                             <li>@Html.ActionLink("Pizze", "Index", "Prodotto", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("I Tuoi Ordini", "Index", "ProdottoOrdinato", new { area = "" }, new { @class = "nav-link" })</li>
                             <li>@Html.ActionLink("Pagina Utente", "PaginaUtenti", "Utenti", new { area = "" }, new { @class = "nav-link" })</li>
                             <li>@Html.ActionLink("Logout", "Logout", "Auth", new { area = "" }, new { @class = "nav-link" })</li>
                         }

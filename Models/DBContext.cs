@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using System.Linq;
+using InForno.Models;
 
 namespace InForno.Models
 {
@@ -14,7 +14,10 @@ namespace InForno.Models
 
         public virtual DbSet<Checkout> Checkout { get; set; }
         public virtual DbSet<Prodotto> Prodotto { get; set; }
-        public virtual DbSet<ProdottoOrdinato> ProdottoOrdinato { get; set; }
+        public virtual DbSet<Storico> Storico { get; set; }
+
+        public virtual DbSet<ProdottoOrdinato> ProdottiOrdinati { get; set; }
+
         public virtual DbSet<Utenti> Utenti { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

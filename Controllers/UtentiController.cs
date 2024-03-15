@@ -26,5 +26,36 @@ namespace InForno.Controllers
             var utenti = db.Utenti.ToList();
             return View(utenti);
         }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(Utenti utenti)
+        {
+            if (ModelState.IsValid)
+            {
+
+                if (db.Utenti.Any(u => u.Username == utenti.Username || u.Email == utenti.Email))
+                {
+                    ModelState.AddModelError("", "L'utente con lo stesso nome utente o email esiste già.");
+                    return View(utenti);
+                }
+
+                db.Utenti.Add(utenti);
+                db.SaveChanges();
+
+                Session["UserID"] = utenti.ID;
+
+                return RedirectToAction("Index", "Prodotto");
+            }
+
+            return View(utenti);
+        }
+
+
     }
 }

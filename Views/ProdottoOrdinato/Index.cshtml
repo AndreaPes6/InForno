@@ -1,0 +1,39 @@
+﻿@model IEnumerable<InForno.Models.ProdottoOrdinato>
+
+@{
+    ViewBag.Title = "Carrello";
+}
+
+<div class="container">
+    <h2 class="mt-5">Carrello</h2>
+    <div class="mt-4">
+        <div class="row">
+            @foreach (var prodotto in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="@prodotto.Prodotto.Foto" class="card-img-top" alt="Foto Prodotto">
+                        <div class="card-body">
+                            <h5 class="card-title">@prodotto.Prodotto.Nome</h5>
+                            <p class="card-text">@prodotto.Prodotto.Descrizione</p>
+                            <p class="card-text">Quantità: @prodotto.Quantità</p>
+                            <p class="card-text">Prezzo: €@(prodotto.Prodotto.Prezzo * prodotto.Quantità)</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="mt-4">
+            @if (Model.Any())
+            {
+                <div class="text-center">
+                    <a href="@Url.Action("Procedi", "Carrello")" class="btn btn-primary">Procedi all'acquisto</a>
+                </div>
+            }
+            else
+            {
+                <p>Il tuo carrello è vuoto.</p>
+            }
+        </div>
+    </div>
+</div>

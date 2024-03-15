@@ -19,7 +19,6 @@ namespace InForno.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-
         public ActionResult Create()
         {
             return View();
